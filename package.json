@@ -1,0 +1,24 @@
+{
+  "name": "alzkbsite",
+  "version": "1.0.0",
+  "description": "Alzheimer's KB Site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jay-m-dev/alzkbsite.git"
+  },
+  "author": "Jay M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jay-m-dev/alzkbsite/issues"
+  },
+  "homepage": "https://github.com/jay-m-dev/alzkbsite#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1"
+  }
+}
