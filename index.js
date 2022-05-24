@@ -10,4 +10,24 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
+app.get('/about', (req, res) => {
+    res.render('about');
+})
+
+app.get('/docs', (req, res) => {
+    res.render('docs');
+})
+
+app.get('/resources', (req, res) => {
+    res.render('resources');
+})
+
+app.get('/getting_started', (req, res) => {
+    res.render('getting_started');
+})
+
+app.get('/sample_queries', (req, res) => {
+    res.render('sample_queries');
+})
+
 app.listen(5000)

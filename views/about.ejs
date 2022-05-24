@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/header'); -%>
+    <body>
+        <%- include('layouts/navbar'); -%>
+        <%- include('layouts/navbar_bg'); -%>
+        <!-- about -->
+        <section class="page-section">
+            <div class="container px-4 px-lg-5">
+                <h2 class="text-center mt-0">What is AlzKB?</h2>
+                <hr class="divider" />
+                <p>   AlzKB is a knowledge base describing the etiology of Alzheimer's
+                Disease with a particular focus on discovering new drug therapies. The
+                knowledge base is implemented as a <b>graph database</b> (using Neo4j),
+                which offers many distinct advantages over traditional relational
+                databases and non-graph formatted representations of biomedical
+                knowledge.</p>
+                
+                <p>The knowledge in AlzKB is sourced from a large set of diverse,
+                publicly available biomedical databases. Currently, AlzKB includes
+                data from the following sources:</p>
+                
+                <ul>
+                <li>AOP-DB (Adverse Outcome Pathway Database)</li>
+                <li>Bgee<sup>*</sup></li>
+                <li>Disease Ontology<sup>*</sup></li>
+                <li>DisGeNET</li>
+                <li>Drugbank</li>
+                <li>EPA Computational Toxicology databases (DSSTox/AcTOR)</li>
+                <li>Gene Ontology<sup>*</sup></li>
+                <li>GWAS Catalog<sup>*</sup></li>
+                <li>Hetionet</li>
+                <li>Human Reference Protein Interactome Mapping Project<sup>*</sup></li>
+                <li>LINCS L1000<sup>*</sup></li>
+                <li>MeSH (NCBI Medical Subject Headings)<sup>*</sup></li>
+                <li>NCBI Gene (Entrez Gene)</li>
+                <li>Pathway Interaction Database<sup>*</sup></li>
+                <li>PharmacotherapyDB<sup>*</sup></li>
+                <li>PubChem</li>
+                <li>Reactome<sup>*</sup></li>
+                <li>SIDER<sup>*</sup></li>
+                <li>TISSUES<sup>*</sup></li>
+                <li>Uberon<sup>*</sup></li>
+                <li>WikiPathways<sup>*</sup></li>
+                </ul>
+                
+                <sup>*</sup>included via Hetionet
+            </div>
+        </section>
+        <%- include('layouts/scripts'); %>
+    </body>
+</html>

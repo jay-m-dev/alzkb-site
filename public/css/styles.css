@@ -11300,7 +11300,7 @@ body {
 }
 
 .page-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 .text-white-75 {
@@ -11390,10 +11390,22 @@ hr.divider-light {
   }
 }
 
+header.navbar_bg {
+  /* padding-top: 10rem; */
+  padding-bottom: calc(10rem - 5.5rem);
+  /* background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/bg-masthead.jpg"); */
+  background: url("../assets/img/bg-masthead.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/bg-masthead.jpg");
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.65) 0%, rgba(92, 77, 66, 0.65) 100%), url("../assets/img/bg-masthead.jpg");
+  /* background: url("../assets/img/bg-masthead.jpg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -11456,4 +11468,8 @@ header.masthead h1, header.masthead .h1 {
 }
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption, #portfolio .container-sm .portfolio-box:hover .portfolio-box-caption, #portfolio .container-md .portfolio-box:hover .portfolio-box-caption, #portfolio .container-lg .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xl .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xxl .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
+}
+
+.doc-container {
+  margin-left: 160px;
 }
