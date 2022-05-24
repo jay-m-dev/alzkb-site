@@ -30,9 +30,9 @@ app.get('/about', (req, res) => {
 //     res.render('sample_queries');
 // })
 
-app.get('/alzkb', (req, res) => {
-    res.sendFile(path.resolve(__dirname,'views/alzkb.html'));
-})
+// app.get('/alzkb', (req, res) => {
+//     res.sendFile(path.resolve(__dirname,'views/alzkb.html'));
+// })
 
 
 app.listen(5000)
