@@ -1,0 +1,393 @@
+
+<style type="text/css" media="screen">
+    /*
+    .nodes-image {
+        margin:-100;
+    }
+    */	
+    @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+    
+    .imageblock .content img, .image img {max-width: 900px;max-height: 300px;}
+    .deck h3, .deck h4 {display: block !important;margin-bottom:8px;margin-top:5px;}
+    .listingblock {margin:8px;}
+    .pull-bottom {position:relative;bottom:1em;}
+    .admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+    .admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+    .admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+    .admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+    .admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+    .admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+    .admonitionblock.note.speaker { display:none; }
+    </style>
+    <style type="text/css" media="screen">
+    /* #editor.maximize-editor .CodeMirror-code { font-size:24px; line-height:26px; } */
+    </style>
+    <article class="guide" ng-controller="AdLibDataController">
+      <carousel class="deck container-fluid">
+        <!--slide class="row-fluid">
+          <div class="col-sm-3">
+            <h3>Hetionet in Neo4j</h3>
+            <p class="lead">Information</p>
+                <!dl>
+                    
+                    
+                    <dt>author"</dt><dd>Daniel Himmelstein</dd>
+                    
+                    
+                </dl>
+            </div>
+          <div class="col-sm-9">
+            <figure>
+              <img style="width:300px" src=""/>
+            </figure>
+          </div>
+        </slide-->
+        
+    
+    
+    <slide class="row-fluid">
+      <div class="col-sm-12">
+        <h3>Hetionet in Neo4j</h3>
+        <br/>
+        <div>
+          <div class="col-lg-3 ng-scope">
+    
+    
+    
+       <h4>Hetionet v1.0</h4>
+       <div class="paragraph">
+    <p>Hetionet is a network of biology, disease, and pharmacology. Knowledge from millions of biomedical studies over the last half century have been encoded into a single hetnet. Version 1.0 contains 47,031 nodes of 11 types and 2,250,197 relationships of 24 types.</p>
+    </div>
+    <div class="paragraph">
+    <p>We created <a href="https://github.com/hetio/hetionet">Hetionet</a> v1.0 for <a href="https://doi.org/bszr">Project Rephetio</a> (<a href="https://doi.org/10.7554/eLife.26726">publication</a>) â€” where we systematically looked at why drugs work and predicted new uses for existing drugs.</p>
+    </div>
+    </div>
+    <div class="col-lg-3 ng-scope">
+    
+    
+    
+       <h4>Neo4j</h4>
+       <div class="paragraph">
+    <p>Neo4j is a database designed for hetnets (graphs with multiple node or relationship types). You&#8217;re currently interacting with Hetionet through the Neo4j Browser, which provides a web interface to the database. This is a read-only instance, so you can&#8217;t modify the network. However, you can run queries and and explore the network.</p>
+    </div>
+    <div class="paragraph">
+    <p>If you are new to Neo4j, check out the following guides:</p>
+    </div>
+    <div class="ulist">
+    <ul>
+    <li>
+    <p><a play-topic="concepts">Concepts</a></p>
+    </li>
+    <li>
+    <p><a play-topic="cypher">Cypher</a></p>
+    </li>
+    <li>
+    <p><a play-topic="intro">Browser Intro</a></p>
+    </li>
+    </ul>
+    </div>
+    </div>
+    <div class="col-lg-6 ng-scope">
+    
+    
+    
+       <h4>Metagraph</h4>
+       <div class="paragraph">
+    <p>The metagraph shows the data model (schema) for Hetionet v1.0. For an interactive version, run <code>CALL db.schema()</code>.</p>
+    </div>
+    <img src="https://github.com/dhimmel/rephetio/raw/5f834b14b94b9b9d2082c5ae0303b57d634c3a40/figure/metagraph-cypher.png" title="Hetionet v1.0 Metagraph for Cypher" class="img-responsive">
+    
+    </div>
+        </div>
+      </div>
+    </slide>
+    
+    
+    
+    <slide class="row-fluid">
+      <div class="col-sm-12">
+        <h3>Explore Hetionet</h3>
+        <br/>
+        <div>
+          <div class="col-lg-3 ng-scope">
+    
+    
+    
+       <h4>Label counts</h4>
+       <div class="paragraph">
+    <p>In Neo4j, node types are called labels. The following query counts the number of nodes per label. Run it by clicking the text box to prefill the command and then hitting <a tooltip-placement="left" class="circled play sl sl-play"></a> in the upper right.</p>
+    </div>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (node)
+    RETURN
+      head(labels(node)) AS label,
+      count(*) AS count
+    ORDER BY count DESC<!--/code--></pre>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-3 ng-scope">
+    
+    
+    
+       <h4>Relationship type counts</h4>
+       <div class="paragraph">
+    <p>Play the following query to count the number of relationships per type.</p>
+    </div>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH ()-[rel]-&gt;()
+    RETURN
+      type(rel) AS rel_type,
+      count(*) AS count
+    ORDER BY count DESC<!--/code--></pre>
+    </div>
+    </div>
+    <div class="paragraph">
+    <p>Notice the suffixes (e.g. <code>GpPW</code> in <code>PARTICIPATES_GpPW</code>) which we include to ensure that relationship types between different labels are distinct.</p>
+    </div>
+    </div>
+    <div class="col-lg-6 ng-scope">
+    
+    
+    
+       <h4>Random relationships</h4>
+       <div class="paragraph">
+    <p>The following query retrieves a random relationship of each type. The query goes through every relationship and thus may take several seconds.</p>
+    </div>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH ()-[rel]-&gt;()
+    WITH type(rel) AS rel_type, collect(rel) AS rels
+    WITH rels[toInteger(rand() * size(rels))] AS rel
+    RETURN startNode(rel), rel, endNode(rel)<!--/code--></pre>
+    </div>
+    </div>
+    <div class="paragraph">
+    <p>By default, the Hetionet Neo4j Browser only shows relationships that were returned by the query.
+    To show every relationship between the displayed nodes instead, select <code>Connect result nodes</code> under settings.</p>
+    </div>
+    </div>
+        </div>
+      </div>
+    </slide>
+    
+    
+    
+    <slide class="row-fluid">
+      <div class="col-sm-12">
+        <h3>Project Rephetio</h3>
+        <br/>
+        <div>
+          <div class="paragraph">
+    <p>Project Rephetio uses Hetionet to predict the probability that each compound treats each disease. The approach uses hetnet edge prediction â€” an algorithm that learns which types of paths occur more frequently between known treatments. Use the <a href="http://het.io/repurpose/">Prediction Browser</a> to browse the predicted probabilities of treatment for 209,168 compoundâ€“disease pairs.</p>
+    </div>
+    <div class="paragraph">
+    <p>Each prediction has a corresponding Neo4j guide, which provides additional details and visualization. For example, play the following commands to see the evidence for</p>
+    </div>
+    <div class="ulist">
+    <ul>
+    <li>
+    <p><strong>bupropion for nicotine dependence</strong> (<a href="https://think-lab.github.io/d/203/#8">read more</a>):</p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->:play https://neo4j.het.io/guides/rep/DB01156/DOID_0050742.html<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    <li>
+    <p><strong>clofarabine treating multiple sclerosis</strong> (<a href="https://think-lab.github.io/d/203/#13">read more</a>):</p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->:play https://neo4j.het.io/guides/rep/DB00631/DOID_2377.html<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    <li>
+    <p><strong>nortriptyline treating migraine</strong> (<a href="https://think-lab.github.io/d/203/#7">read more</a>):</p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->:play https://neo4j.het.io/guides/rep/DB00540/DOID_6364.html<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    </ul>
+    </div>
+        </div>
+      </div>
+    </slide>
+    
+    
+    
+    <slide class="row-fluid">
+      <div class="col-sm-12">
+        <h3>Learn how to query Hetionet using Cypher</h3>
+        <br/>
+        <div>
+          <div class="paragraph">
+    <p>Here are some simple queries to help new users get acquainted with Cypher and Hetionet.</p>
+    </div>
+    <div class="olist arabic">
+    <ol class="arabic">
+    <li>
+    <p><strong>Retrieve the Disease node named lung cancer:</strong></p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (node:Disease {name: "lung cancer"}) RETURN node<!--/code--></pre>
+    </div>
+    </div>
+    <div class="paragraph">
+    <p>Which is equivalent to:</p>
+    </div>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (node:Disease)
+    WHERE node.name = "lung cancer"
+    RETURN node<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    <li>
+    <p><strong>Find the anatomies (tissue types) where lung cancer localizes:</strong></p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH path = (:Disease {name: 'lung cancer'})-[:LOCALIZES_DlA]-&gt;()
+    RETURN path<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    <li>
+    <p><strong>Find all genes associated with spinal cancer:</strong></p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH path = (:Disease {name: 'spinal cancer'})-[:ASSOCIATES_DaG]-&gt;()
+    RETURN path<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    <li>
+    <p><strong>Find all genes associated with both liver and kidney cancer</strong> (return results as a table):</p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (source:Disease)-[:ASSOCIATES_DaG]-(gene:Gene)-[:ASSOCIATES_DaG]-(target:Disease)
+    WHERE source.name = 'liver cancer'
+      AND target.name = 'kidney cancer'
+    RETURN
+      gene.name AS gene_symbol,
+      gene.description AS gene_name,
+      gene.url AS url
+    ORDER BY gene_symbol<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    <li>
+    <p><strong>Find all genes that participate in the mitotic spindle checkpoint biological process:</strong></p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH path = ({name: 'mitotic spindle checkpoint'})-[rel:PARTICIPATES_GpBP]-()
+    RETURN path<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    <li>
+    <p><strong>Find all genes that participate in the mitotic spindle checkpoint and are expressed in the lung:</strong></p>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH path = (bp:BiologicalProcess)-[:PARTICIPATES_GpBP]-(gene:Gene)-[:EXPRESSES_AeG]-(anatomy:Anatomy)
+    WHERE bp.name = 'mitotic spindle checkpoint'
+      AND anatomy.name = 'lung'
+    RETURN path<!--/code--></pre>
+    </div>
+    </div>
+    </li>
+    </ol>
+    </div>
+    <div class="paragraph">
+    <p>For more advanced examples, see our <a href="https://doi.org/10.15363/thinklab.d220">query depot</a>.</p>
+    </div>
+        </div>
+      </div>
+    </slide>
+    
+    
+    
+    <slide class="row-fluid">
+      <div class="col-sm-12">
+        <h3>Miscellany</h3>
+        <br/>
+        <div>
+          
+    
+    
+       <h4>Style</h4>
+       <div class="paragraph">
+    <p>Execute this command to load the hetionet style. Once the style is loaded, the node coloring in the browser will match the metagraph from the first slide in this guide. This command only needs to be run once per web browser.</p>
+    </div>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding"><!--code-->:style https://neo4j.het.io/guides/graphstyle.grass<!--/code--></pre>
+    </div>
+    </div>
+    
+    
+    
+       <h4>Hosting</h4>
+       <div class="paragraph">
+    <p><a href="https://neo4j.het.io"><strong>neo4j.het.io</strong></a> is hosted on <a href="https://www.digitalocean.com/">DigitalOcean</a> (<a href="https://doi.org/10.15363/thinklab.d216">learn more</a>). We&#8217;d like to thanks DigitalOcean for their sponsorship of the Hetionet Browser.</p>
+    </div>
+        </div>
+      </div>
+    </slide>
+    
+    
+    
+    <slide class="row-fluid">
+      <div class="col-sm-12">
+        <h3>Querying Hetionet from Python</h3>
+        <br/>
+        <div>
+          <div class="paragraph">
+    <p>We allow users to programmatically query Hetionet. Our Neo4j instance supports HTTP(S) and Bolt connections. The code below shows how to query Hetionet from Python using the official <code>neo4j</code> driver and the <code>py2neo</code> community driver.</p>
+    </div>
+    <div class="listingblock">
+    <div class="content">
+    <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="python" lang="python"><!--code class="python language-python"--># We use Pandas DataFrames to store tabular query results
+    # However, this is an optional step for downstream convenience
+    import pandas
+    
+    # Return 5 arbitrary diseases
+    query = '''
+    MATCH (disease:Disease)
+    RETURN
+      disease.identifier as identifier,
+      disease.name AS name
+    LIMIT 5
+    '''
+    
+    # Uses the official neo4j-python-driver. See https://github.com/neo4j/neo4j-python-driver
+    from neo4j.v1 import GraphDatabase
+    driver = GraphDatabase.driver("bolt://neo4j.het.io")
+    with driver.session() as session:
+        result = session.run(query)
+        result_df = pandas.DataFrame((x.values() for x in result), columns=result.keys())
+    
+    # Uses py2neo. See http://py2neo.org/v3/
+    import py2neo
+    graph = py2neo.Graph("bolt://neo4j.het.io", bolt=True, secure=True,
+        http_port=80, https_port=443, bolt_port=7687)
+    cursor = graph.run(query)
+    result_df = pandas.DataFrame.from_records(cursor, columns=cursor.keys())<!--/code--></pre>
+    </div>
+    </div>
+    <div class="paragraph">
+    <p>In addition to Python, Neo4j has driver support for <a href="https://neo4j.com/developer/language-guides/">many other languages</a>.</p>
+    </div>
+    <div class="paragraph">
+    <p>We currently limit queries to 120 seconds. If you notice that the Neo4j server is overloaded, please hold off automated queries. If you are doing a substantial amount of querying, please run the database locally (see the <a href="https://hub.docker.com/r/dhimmel/hetionet/">Hetionet Docker</a>).</p>
+    </div>
+        </div>
+      </div>
+    </slide>
+      </carousel>
+    </article>

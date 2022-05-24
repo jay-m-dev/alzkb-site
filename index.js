@@ -30,4 +30,9 @@ app.get('/sample_queries', (req, res) => {
     res.render('sample_queries');
 })
 
+app.get('/alzkb', (req, res) => {
+    res.render('alzkb');
+})
+
+
 app.listen(5000)
