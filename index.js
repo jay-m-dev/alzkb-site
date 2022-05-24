@@ -31,7 +31,7 @@ app.get('/sample_queries', (req, res) => {
 })
 
 app.get('/alzkb', (req, res) => {
-    res.render('alzkb');
+    res.sendFile(path.resolve(__dirname,'views/alzkb.html'));
 })
 
 
