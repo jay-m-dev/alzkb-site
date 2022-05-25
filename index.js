@@ -48,5 +48,9 @@ app.get('/alzkb', (req, res) => {
     res.render('alzkb');
 })
 
+app.get('/samples', (req, res) => {
+    res.render('samples');
+})
+
 
 app.listen(5000)
