@@ -11397,7 +11397,7 @@ header.navbar_bg {
   background: url("../assets/img/bg-masthead.jpg");
   background-position: top;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
   background-size: cover;
 }
 
