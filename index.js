@@ -7,15 +7,6 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-//     res.header("Access-Control-Allow-Credentials", "true");
-//     res.header("Access-Control-Allow-Methods","GET,HEAD,POST,OPTIONS,PUT"); // update to match the domain you will make the request from
-//     res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Access-Control-Request-Headers");
-//     next();
-//   });
-
-
 app.get('/', (req, res) => {
     res.render('index');
 })
@@ -38,10 +29,6 @@ app.get('/about', (req, res) => {
 
 // app.get('/sample_queries', (req, res) => {
 //     res.render('sample_queries');
-// })
-
-// app.get('/alzkb', (req, res) => {
-//     res.sendFile(path.resolve(__dirname,'views/alzkb.html'));
 // })
 
 app.get('/alzkb', (req, res) => {
