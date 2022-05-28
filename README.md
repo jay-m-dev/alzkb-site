@@ -1,2 +1,2 @@
-# alzkbsite
+# alzkb
 Alzheimer's KB Site

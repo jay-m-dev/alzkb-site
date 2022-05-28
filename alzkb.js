@@ -8,7 +8,7 @@ app.set('view engine', 'ejs')
 
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('alzkb');
 })
 
 app.get('/about', (req, res) => {
@@ -32,7 +32,7 @@ app.get('/about', (req, res) => {
 // })
 
 app.get('/alzkb', (req, res) => {
-    res.render('alzkb');
+    res.render('alzkb_about');
 })
 
 app.get('/samples', (req, res) => {

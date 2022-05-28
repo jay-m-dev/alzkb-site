@@ -1,5 +1,5 @@
 {
-  "name": "alzkbsite",
+  "name": "alzkb",
   "version": "1.0.0",
   "description": "Alzheimer's KB Site",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jay-m-dev/alzkbsite.git"
+    "url": "git+https://github.com/jay-m-dev/alzkb.git"
   },
   "author": "Jay M",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jay-m-dev/alzkbsite/issues"
+    "url": "https://github.com/jay-m-dev/alzkb/issues"
   },
-  "homepage": "https://github.com/jay-m-dev/alzkbsite#readme",
+  "homepage": "https://github.com/jay-m-dev/alzkb#readme",
   "dependencies": {
     "ejs": "^3.1.8",
     "express": "^4.18.1"
