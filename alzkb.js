@@ -3,13 +3,13 @@ const express = require('express')
 const config = require('./config')
 
 const app = express()
-const helmet = require('helmet')
+// const helmet = require('helmet')
 // const ejs = require('ejs')
 require('ejs')
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
-app.use(helmet())
+// app.use(helmet())
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
