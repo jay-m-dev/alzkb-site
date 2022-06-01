@@ -1,43 +1,34 @@
 const express = require('express')
-const path = require('path')
+// const path = require('path')
+const config = require('./config')
 
-const app = new express()
-const ejs = require('ejs')
+const app = express()
+const helmet = require('helmet')
+// const ejs = require('ejs')
+require('ejs')
+
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
+app.use(helmet())
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 app.get('/', (req, res) => {
-    res.render('alzkb');
+  res.render('alzkb', config)
 })
 
 app.get('/about', (req, res) => {
-    res.render('about');
+  res.render('about')
 })
 
-// app.get('/docs', (req, res) => {
-//     res.render('docs');
-// })
-
-// app.get('/resources', (req, res) => {
-//     res.render('resources');
-// })
-
-// app.get('/getting_started', (req, res) => {
-//     res.render('getting_started');
-// })
-
-// app.get('/sample_queries', (req, res) => {
-//     res.render('sample_queries');
-// })
-
 app.get('/alzkb', (req, res) => {
-    res.render('alzkb_about');
+  res.render('alzkb_about')
 })
 
 app.get('/samples', (req, res) => {
-    res.render('samples');
+  res.render('samples')
 })
 
-
-app.listen(5000)
+app.listen(config.PORT)
