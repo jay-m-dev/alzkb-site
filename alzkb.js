@@ -11,10 +11,6 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 // app.use(helmet())
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-
 app.get('/', (req, res) => {
   res.render('alzkb', config)
 })
