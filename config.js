@@ -1,11 +1,11 @@
 const config = {
   app: {
     dev: {
-      PORT: 5000,
+      PORT: 5001,
       neo_browser: "http://3.93.173.231:7474/browser/"
     },
     prod: {
-      PORT: 5000,
+      PORT: 5001,
       neo_browser: "http://neo4j.alzkb.ai/browser/"
     }
   }
