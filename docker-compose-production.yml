@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_production
-    image: "alzkb"
+    image: "alzkb_app"
     tty: true
     stdin_open: true
     ports:
