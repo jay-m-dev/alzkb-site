@@ -1,17 +1,17 @@
 services:
-  app:
+  alzkb:
     build:
       context: ./app
       dockerfile: Dockerfile
-    image: "alzkb_app"
+    image: "alzkb_site_dev"
     tty: true
     stdin_open: true
     ports:
-      - "5001:5001"
+      - "5000:5000"
   nginx:
     restart: always
     build:
       context: ./nginx
-    image: "alzkb_nginx"
+    image: "alzkb_nginx_dev"
     ports:
       - "80:80"
