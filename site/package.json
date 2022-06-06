@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node alzkb.js",
+    "start-dev": "node alzkb.js --production",
     "lint": "eslint ."
   },
   "repository": {

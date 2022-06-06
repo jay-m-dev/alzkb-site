@@ -1,0 +1,8 @@
+services:
+  alzkb:
+    build:
+      context: ./site
+      dockerfile: Dockerfile
+    image: alzkb_site_dev
+    ports: 
+      - "80:5000"
