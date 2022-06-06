@@ -2,7 +2,7 @@
   "name": "alzkb",
   "version": "1.0.0",
   "description": "Alzheimer's KB Site",
-  "main": "index.js",
+  "main": "alzkb.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node alzkb.js",

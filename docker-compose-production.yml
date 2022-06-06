@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile_production
+    image: "alzkb_app_prod"
+    tty: true
+    stdin_open: true
+    ports:
+      - "5000:5000"
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    image: "alzkb_nginx_prod"
+    ports:
+      - "80:80"

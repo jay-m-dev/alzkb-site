@@ -27,4 +27,4 @@ app.get('/samples', (req, res) => {
   res.render('samples')
 })
 
-app.listen(config.PORT)
+app.listen(process.env.PORT)
