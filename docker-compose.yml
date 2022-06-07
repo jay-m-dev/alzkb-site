@@ -3,15 +3,25 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
-    image: "alzkb_site"
+    image: "docker.io/moorelab/alzkb_site"
     tty: true
     stdin_open: true
     env_file:
       ./app/config/alzkb.env
+    ports:
+      - "5000:5000"
+    networks:
+      - nginxnet
   nginx:
     restart: always
     build:
       context: ./nginx
-    image: "alzkb_nginx"
+    image: "docker.io/moorelab/alzkb_nginx"
     ports:
       - "80:80"
+    depends_on:
+      - alzkb
+    networks:
+      - nginxnet
+networks:
+  nginxnet:

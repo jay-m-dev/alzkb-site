@@ -18,5 +18,5 @@ RUN npm install pm2 --location=global
 # Bundle app source
 COPY . .
 
-#EXPOSE 5000
+EXPOSE 5000
 CMD ["pm2-runtime", "alzkb.js"]
