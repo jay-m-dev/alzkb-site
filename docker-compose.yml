@@ -3,15 +3,15 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
-    image: "alzkb_site_dev"
+    image: "alzkb_site"
     tty: true
     stdin_open: true
-    ports:
-      - "5000:5000"
+    env_file:
+      ./app/config/alzkb.env
   nginx:
     restart: always
     build:
       context: ./nginx
-    image: "alzkb_nginx_dev"
+    image: "alzkb_nginx"
     ports:
       - "80:80"
