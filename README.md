@@ -8,20 +8,28 @@
       - [Official Docker Website Getting Started](https://docs.docker.com/engine/getstarted/step_one/)
       - [Official Docker Installation for Windows](https://docs.docker.com/docker-for-windows/install/)
   - docker compose
-      - can be installed with apt install docker-compose-plugin
+      - can be installed with apt install `docker-compose-plugin`
 
-### Starting and Stopping
+### Building and Starting
 To start, run build.sh (no arguments for a development environment, or argument "prod" for production):
   - Development
-    - `./build.sh`
+    - `./build.sh dev`
   - Production
     - `./build.sh prod`
 
-Alternatively, these commands can also be run:
-  - Development
-    - `docker compose -f ./docker-compose.yml up -d --build`
-  - Production
-    - `docker compose -f ./docker-compose-production.yml up -d --build`
+### Docker Hub
 
-To stop and remove the docker containers run:
+#### Requirements
+Production images are available on [Docker Hub](hub.docker.com)
+  - moorlab/alzkb_site
+  - moorlab/alzkb_nginx
+
+This GitHub repository is still needed to deploy the images using `deploy.sh` and `docker-compose.yml`
+
+##### Deployment
+Run this shell script (make sure that this repo has been cloned into the VM)
+  - `./deploy.sh`
+
+### Stopping
+To stop and remove the docker containers run the following command (this works whether the running images were built or using the `build.sh` or deployed from Docker Hub):
   - `docker compose down`
