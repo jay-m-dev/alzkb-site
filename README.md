@@ -28,7 +28,7 @@ This GitHub repository is still needed to deploy the images using `deploy.sh` an
 
 ##### Deployment
 Run this shell script (make sure that this repo has been cloned into the VM)
-  - `./deploy.sh``
+  - `./deploy.sh`
 
 ### Stopping
 To stop and remove the docker containers run the following command (this works whether the running images were built or using the `build.sh` or deployed from Docker Hub):
