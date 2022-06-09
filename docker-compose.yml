@@ -1,9 +1,11 @@
+version: '3.8'
+
 services:
   alzkb:
     build:
       context: ./app
       dockerfile: Dockerfile
-    image: "moorelab/alzkb_site"
+    image: "moorelab/alzkb_site:${ALZKB_ENV}-${TAG}"
     tty: true
     stdin_open: true
     environment:
@@ -15,7 +17,7 @@ services:
     restart: always
     build:
       context: ./nginx
-    image: "moorelab/alzkb_nginx"
+    image: "moorelab/alzkb_nginx:${ALZKB_ENV}-${TAG}"
     ports:
       - "80:80"
     depends_on:
