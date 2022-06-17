@@ -1,4 +1,4 @@
 node_modules
 .env
 nginx/alzkb.conf
-neo4j/dump
+neo4j/dump/*
