@@ -1,7 +1,7 @@
 const config = {
   app: {
     dev: {
-      neo_browser: "http://3.93.173.231:7474/browser/"
+      neo_browser: "http://35.80.108.132:7474/browser/"
     },
     prod: {
       neo_browser: "http://neo4j.alzkb.ai/browser/"

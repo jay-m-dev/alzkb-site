@@ -3,9 +3,6 @@ FROM node:16
 # Create app directory
 WORKDIR /usr/src/app
 
-#ENV NODE_ENV=development
-#ENV PORT=5000
-
 # Install app dependencies
 # Copy both package.json and package-lock.json
 COPY package*.json ./
