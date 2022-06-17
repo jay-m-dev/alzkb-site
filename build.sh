@@ -1,12 +1,13 @@
 #!/bin/bash
 
-if [[ $1 == "prod" ]] || [[ $1 == "dev" ]]; then
+if [[ $1 == "prod" ]] || [[ $1 == "dev" ]] || [[ $1 == "temp" ]]; then
   echo "Building $1..."
 else
   echo "USAGE: ./build.sh [OPTION] [ARG]"
   echo "OPTIONS:"
   echo " prod    - production environment"
   echo " dev     - development environment"
+  echo " temp    - temporary environment"
   echo "ARGS:"
   echo " up      - Start containers "
   exit
