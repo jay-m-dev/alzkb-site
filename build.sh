@@ -17,10 +17,14 @@ if [[ $1 == "prod" ]]; then
   echo "copying prod config files"
   cp ./config/.env.prod ./.env # .env file is used by docker compose
   cp nginx/alzkb.prod.conf nginx/alzkb.conf
+elif [[ $1 == "temp" ]]; then
+  echo "copying temp config files"
+  cp ./config/.env.temp ./.env # .env file is used by docker compose
+  cp nginx/alzkb.temp.conf nginx/alzkb.conf
 else
   echo "copying dev config files"
-  cp ./config/.env.dev ./.env # .env file is used by docker compose
-  cp nginx/alzkb.dev.conf nginx/alzkb.conf
+  cp ./config/.env.temp ./.env # .env file is used by docker compose
+  cp nginx/alzkb.temp.conf nginx/alzkb.conf
 fi
 
 echo "Building images..."
