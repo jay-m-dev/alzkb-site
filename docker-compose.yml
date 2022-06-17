@@ -18,7 +18,6 @@ services:
     restart: always
     build:
       context: ./nginx
-      dockerfile: Dockerfile
     #image: "moorelab/alzkb_nginx:${ALZKB_ENV}-${TAG}"
     image: "alzkb_nginx:${ALZKB_ENV}-${TAG}"
     ports:
@@ -28,7 +27,6 @@ services:
   neo4j:
     build:
       context: ./neo4j
-      dockerfile: Dockerfile
     image: 'alzkb_neo4j:${ALZKB_ENV}-${TAG}'
     environment:
       - NEO4J_browser_post__connect__cmd=guide intro;play ${ALZKB_URL}/${ALZKB_ABOUT};play ${ALZKB_URL}/${ALZKB_SAMPLES}
