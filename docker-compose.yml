@@ -29,9 +29,10 @@ services:
       context: ./neo4j
     image: 'alzkb_neo4j:${ALZKB_ENV}-${TAG}'
     environment:
-      - NEO4J_remote_content_hostname_whitelist=*
+      - NEO4J_browser_remote_content_hostname_whitelist=*
       - NEO4J_browser_post__connect__cmd=guide intro;play ${ALZKB_URL}/${ALZKB_ABOUT};play ${ALZKB_URL}/${ALZKB_SAMPLES}
-      - NEO4J_dbms_read__only=true
+      #- NEO4J_dbms_read__only=true
+      - NEO4J_dbms_databases_default__to__read__only=true
       - NEO4J_dbms_security_auth__enabled=false
       - NEO4J_dbms_default__listen__address=0.0.0.0
       - NEO4J_dbms_connector_http_enabled=true
