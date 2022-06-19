@@ -1,4 +1,3 @@
 FROM nginx:latest
-RUN /bin/bash -c 'rm /etc/nginx/conf.d/default.conf'
-COPY alzkb.conf /etc/nginx/conf.d/alzkb.conf
-EXPOSE 80
+COPY ./alzkb.template /etc/nginx/conf.d/alzkb.template
+RUN /bin/bash -c envsubst < /etc/nginx/conf.d/alzkb.template > /etc/nginx/conf.d/default2.config

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  neo4j:
+    image: 'neo4j:latest'
+    env_file:
+      - ./config/.env.neo4j
+    volumes:
+      - '${NEO_DATA_ROOT}/neo4j/data:/var/lib/neo4j/data'
+      - '${NEO_DATA_ROOT}/neo4j/logs:/var/lib/neo4j/logs'
+      - '${NEO_DATA_ROOT}/neo4j/import:/var/lib/neo4j/import'
+      - '${NEO_DATA_ROOT}/neo4j/plugins:/var/lib/neo4j/plugins'
+    ports:
+      - 7474:7474
+      - 7687:7687
+    restart: on-failure

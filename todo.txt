@@ -1,0 +1,2 @@
+Still working on nginx/Dockerfile
+envsubst not working yet, needs to sub default.conf variables correctly
