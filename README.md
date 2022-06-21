@@ -1,26 +1,26 @@
 # Alzheimer's Knowledgebase (AlzKB) Site
 This repository contains the following components:
 
-## Website
-Website showing some general information about this project. The source code for this website is found in the `app` direcory
+- Website
+Website showing some general information about this project. The source code for this website is found in the `app/` directory
 
-## Neo4j
+- Neo4j
 Neo4j is used to store the graph database for this Knowledgebase.
 
-## Nginx
+- Nginx
 Nginx is used as a reverse proxy for the Website and the Neo4j Browser
 
-## Configuration files
-### Docker Compose Files
-The files in the `compose` directory are `.yml` files which contain definitions for building a docker image.  
-To build and run these serives see the **Installation** section below.
+- Configuration files
+  - Docker Compose Files
+    - The files in the `compose/` directory are `.yml` files which contain definitions for building a docker image.  
+    - To build and run these serives see the **Installation** section below.
 
-### Environmental Variables
-The configuration files in the `config` directory contain environmental variables used by the different docker services. You will find the following files:
-  - **common.env**: contains variables which are shared among all services
-  - **neo4j.env**: contains variables which are specific to the neo4j service
-  - **nginx.env**: contains variables which are specific to the nginx service
-  - **node.env**: contains variables which are specific to the node service
+- Environmental Variables
+  - The configuration files in the `config/` directory contain environmental variables used by the different docker services. You will find the following files:
+    - **common.env**: contains variables which are shared among all services
+    - **neo4j.env**: contains variables which are specific to the neo4j service
+    - **nginx.env**: contains variables which are specific to the nginx service
+    - **node.env**: contains variables which are specific to the node service
 
 # Installation
 ## Install Docker
@@ -31,38 +31,38 @@ The configuration files in the `config` directory contain environmental variable
 - **docker compose**
     - This can be installed by running `apt install docker-compose-plugin`
 
-## Building Services
+## Building the Services
 `build.sh` is provided for your convenience to build the different services. The services can all be built independently of each other.
 
 ### Website (Optional)
-This step is optional, if you will not be deploying this website, this step can be skipped.
+This step is optional, if you will not be deploying this website, this step can be skipped.  
 Run `./build.sh app` to build a nodejs container with the AlzKB Website.
 
 ### neo4j-admin
 Run `./build.sh neo4j-admin` to build a neo4j/neo4j-admin docker image which will be used to load a neo4j dump file (see the **Running Services** section below).
 
-**NOTES:**
-- **neo4j-admin.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed. These must be the same **volumes** as defined in **neo4j.yml**.
+- **NOTE:**
+  - **neo4j-admin.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed. These must be the same **volumes** as defined in **neo4j.yml**.
 
 ### neo4j
 Run `./build.sh neo4j` to build a neo4j docker image.
 
-**NOTES:**
-- **neo4j.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed.
+- **NOTE:**
+  - **neo4j.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed.
 
 ### nginx
 Run `./build.sh nginx` to build an nginx docker image that will be configured to act as a reverse proxy for both the **Website** and the **Neo4j Browser**.
 
-**NOTES:**
-- If you are not deploying the **Website** for this project, **nginx** is not required to run the **Neo4j Browser**. The **Neo4j Browser** can still be accessed through the default port 7474. But using **nginx** will allow you to navigate to the browser without entering the port on the URL.
+- **NOTE:**
+  - If you are not deploying the **Website** for this project, **nginx** is not required to run the **Neo4j Browser**. The **Neo4j Browser** can still be accessed through the default port 7474. But using **nginx** will allow you to navigate to the browser without entering the port on the URL.
 
 
-## Running Services
+## Running the Services
 `run.sh` is provided for your convenience to run the different services after they have been built.
 
 If you inspect **run.sh** you will notice that the services will be launched in **detached** mode (`-d` flag)
 
-Once the service is up an running, you can see its status by running `docker ps`
+Once a service is up an running, you can see its status by running `docker ps`
 
 TODO: insert image here.
 
@@ -79,31 +79,32 @@ Once downloaded, place the dump file in the **neo4j/dump/** directory. The file 
 
 Run `./run.sh neo4j-admin` run the **neo4j-admin** image to load the **neo4j/dump/alzkb.dump** file (see the **Running Services** section below).
 
-**IMPORTANT: The neo4j container MUST NOT be running when loading the dump file.**
-To check if neo4j is running, run this command to list the currenlty running docker containers `docker ps`
+**IMPORTANT: The neo4j container MUST NOT be running when loading the dump file.**  
+To check if neo4j is running, run `docker ps` to list the currenlty running docker containers  
 If a neo4j container is running, it can be stoped by running `docker stop my_container` where **my_container** is either the name of the container or the container ID.
 
 **Example:**
 TODO: Insert image here
 
-**NOTES:**
-- **neo4j-admin.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed. These must be the same **volumes** as defined in **neo4j.yml**.
-- This step needs to be run anytime you wish to load a new dump file. (Remember to rename the file to **alzkb.dump** if necessary)
-- If the current data has not changed, and you need to rebuild the **neo4j** service, there is no need to run this step again. **neo4j** can be rebuilt independently (assuming that the **volumes** definition has not changed in **compose/neo4j.yml**)
+- **NOTES:**
+  - **neo4j-admin.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed. These must be the same **volumes** as defined in **neo4j.yml**.
+  - This step needs to be run anytime you wish to load a new dump file. (Remember to rename the file to **alzkb.dump** if necessary)
+  - If the current data has not changed, and you need to rebuild the **neo4j** service, there is no need to run this step again. **neo4j** can be rebuilt independently (assuming that the **volumes** definition has not changed in **compose/neo4j.yml**)
 
 ### neo4j
 Run `./run.sh neo4j` to run the neo4j docker container.  
 If the container is running successfully, navigate to the Neo4j Browser at http://browser_url:7474 (change **browser_url** to whatever value is defined in **config/nginx.env MYNGINX_NEO4J_BROWSER**, see the **Configuration** section below for more details.)
 
-**NOTES:**
-- **neo4j.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed.
+- **NOTE:**
+  - **neo4j.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed.
 
 ### nginx
 Run `./run.sh nginx` to run the nginx docker container.  
 If the container is running successfully, navigating to http://host_url (change **host_url** to whatever value is defined in **config/common.env ALZKB_HOST**, see the **Configuration** section below for more details.) will show the **Website** (if it was deployed)  
-**NOTE:** 
-- Using the value defined in **config/common.env ALZKB_HOST** will bring up the **Website**, if it was deployed.
-- Using the value defined in **config/nginx.env MYNGINX_NEO4J_BROWSER** will bring up the Neo4J Brower (i.e. no need to type port :7474)
+
+- **NOTES:** 
+  - Using the value defined in **config/common.env ALZKB_HOST** will bring up the **Website**, if it was deployed.
+  - Using the value defined in **config/nginx.env MYNGINX_NEO4J_BROWSER** will bring up the Neo4J Brower (i.e. no need to type port :7474)
 
 ## Configuration
 The **config/** directory contains the following files with environmental variables:
@@ -121,15 +122,16 @@ Port where the **Website** is being served by ExpressJS. This variable is used b
 Directory where the data from **Neo4J** will be saved (data, logs, etc.)
 
 ### neo4j.env
-This file contains the environmental used by the Neo4j service. For example, **NEO4J_dbms_security_auth__enabled=false** tells the server to allow connections without providing user credentials.  
-These variables are explained in the Neo4j [neo4j.conf](neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/)
+This file contains the environmental used by the Neo4j service. For example, `NEO4J_dbms_security_auth__enabled=false` tells the server to allow connections without user credentials.  
+These variables are explained in the Neo4j documenation: [neo4j.conf](neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/)
 
-NOTE that the variables defined in **neo4j.env** are prefixed with **NEO4J_** and use underscores **_** instead of peridods. That is **one** underscore **_** is used instead of periods, and a **two** underscores **__** are used for underscores in the neo4j.conf file. **NEO4J_dbms_security_auth__enabled** translates to the dbms.security.auth_enabled variable in the Neo4j documentation.
+NOTE that the variables defined in **neo4j.env** are prefixed with `NEO4J_` and use underscores **_** instead of peridods. That is **one** underscore **_** is used instead of periods, and a **two** underscores **__** are used for underscores in the neo4j.conf file.  
+For example, `NEO4J_dbms_security_auth__enabled````````` translates to the `dbms.security.auth_enabled` variable in the Neo4j documentation.
 
 ### nginx.env
 `MYNGINX_NEO4J_BROWSER`
-This variable is used as a different URL from **ALZKB_HOST** (in **common.env**) in the case that the Neo4j Browser is being served from another domain
+This variable is used as a different URL from `ALZKB_HOST` (in **common.env**) in the case that the Neo4j Browser is being served from another domain
 
 ### node.env
 `NODE_ENV`
-This is the environment that the NodeJS application runs on. When the value of this variable is set to **production**, the `npm install` command installs dependencies without including any devDependancies as documented [here](l)
+This is the environment that the NodeJS application runs on. When the value of this variable is set to **production**, the `npm install` command installs dependencies without including any devDependancies as documented [here](l).
