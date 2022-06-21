@@ -8,3 +8,4 @@ services:
     volumes:
       - '${NEO_DATA_ROOT}/neo4j/data:/var/lib/neo4j/data'
       - '${NEO_DATA_ROOT}/neo4j/import:/var/lib/neo4j/import'
+      - '${NEO_DATA_ROOT}/neo4j/logs:/var/lib/neo4j/logs'
