@@ -1,6 +1,9 @@
 server {
     server_name $ALZKB_HOST;
 
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
     location / {
         proxy_pass http://$ALZKB_APP_SERVICE:$ALZKB_PORT;
         proxy_http_version 1.1;

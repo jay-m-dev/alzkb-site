@@ -1,4 +1,1 @@
 manage cors through node app instead of nginx
-make docker-compose.yml build all images
-build shell script for neo4j-dump
-write README with step by step instructions
