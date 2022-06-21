@@ -1,22 +1,19 @@
 # Alzheimer's Knowledgebase (AlzKB) Site
 This repository contains the following components:
 
-- Website
-Website showing some general information about this project. The source code for this website is found in the `app/` directory
+- **Website**: site with some general information about this project. The source code for this website is found in the `app/` directory
 
-- Neo4j
-Neo4j is used to store the graph database for this Knowledgebase.
+- **Neo4j**: used to store the graph database for this Knowledgebase.
 
-- Nginx
-Nginx is used as a reverse proxy for the Website and the Neo4j Browser
+- **Nginx**: used as a reverse proxy for the Website and the Neo4j Browser
 
-- Configuration files
+- **Configuration files**
   - Docker Compose Files
     - The files in the `compose/` directory are `.yml` files which contain definitions for building a docker image.  
     - To build and run these serives see the **Installation** section below.
 
-- Environmental Variables
-  - The configuration files in the `config/` directory contain environmental variables used by the different docker services. You will find the following files:
+- **Environmental Variables**
+  - The files in the `config/` directory contain environmental variables used by the different docker services. You will find the following files:
     - **common.env**: contains variables which are shared among all services
     - **neo4j.env**: contains variables which are specific to the neo4j service
     - **nginx.env**: contains variables which are specific to the nginx service
@@ -92,7 +89,7 @@ This utility will load a dump file into the Neo4j database.
   - **NOTE:**
     - **neo4j.yml** defines [named volumes](https://docs.docker.com/storage/volumes/) to store the data on the host machine where this project is being deployed.
 
-4. ### nginx
+### 4. nginx
 - **Run** `./run.sh nginx` to run the nginx docker container.  
 - Navigate to http://host_url (replace **host_url** with one of the following values)
   - If the **Website** was deployed, replace **host_url** with the value defined in **config/common.env ALZKB_HOST**, see the **Configuration** section below for more details.
