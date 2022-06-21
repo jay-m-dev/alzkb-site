@@ -34,23 +34,23 @@ Nginx is used as a reverse proxy for the Website and the Neo4j Browser
 ## Building the Services
 `build.sh` is provided for your convenience to build the different services. The services can all be built independently of each other.
 
-### Website (Optional)
+1. ### Website (Optional)
 This step is optional, if you will not be deploying this website, this step can be skipped.  
 Run `./build.sh app` to build a nodejs container with the AlzKB Website.
 
-### neo4j-admin
+2. ### neo4j-admin
 Run `./build.sh neo4j-admin` to build a neo4j/neo4j-admin docker image which will be used to load a neo4j dump file (see the **Running Services** section below).
 
 - **NOTE:**
   - **neo4j-admin.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed. These must be the same **volumes** as defined in **neo4j.yml**.
 
-### neo4j
+3. ### neo4j
 Run `./build.sh neo4j` to build a neo4j docker image.
 
 - **NOTE:**
   - **neo4j.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed.
 
-### nginx
+4. ### nginx
 Run `./build.sh nginx` to build an nginx docker image that will be configured to act as a reverse proxy for both the **Website** and the **Neo4j Browser**.
 
 - **NOTE:**
@@ -68,12 +68,12 @@ TODO: insert image here.
 
 To view any logs from the running container, you may run `docker logs container_name`
 
-### Website (Optional)
+1. ### Website (Optional)
 This step is optional, if you did not build the container for the Website, this step can be skipped.
 
 Run `./run.sh app` to run the nodejs container with the AlzKB Website.
 
-### neo4j-admin
+2. ### neo4j-admin
 This step will use the **neo4j-admin** utility to load the alzkb dump file into the Neo4j database. The full database dump file can be downloaded [here](https://upenn.box.com/s/dalcofa8i7rkkc2h2n6bfg8nvmwi83pq)  
 Once downloaded, place the dump file in the **neo4j/dump/** directory. The file must be named **alzkb.dump**
 
@@ -91,14 +91,14 @@ TODO: Insert image here
   - This step needs to be run anytime you wish to load a new dump file. (Remember to rename the file to **alzkb.dump** if necessary)
   - If the current data has not changed, and you need to rebuild the **neo4j** service, there is no need to run this step again. **neo4j** can be rebuilt independently (assuming that the **volumes** definition has not changed in **compose/neo4j.yml**)
 
-### neo4j
+3. ### neo4j
 Run `./run.sh neo4j` to run the neo4j docker container.  
 If the container is running successfully, navigate to the Neo4j Browser at http://browser_url:7474 (change **browser_url** to whatever value is defined in **config/nginx.env MYNGINX_NEO4J_BROWSER**, see the **Configuration** section below for more details.)
 
 - **NOTE:**
   - **neo4j.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed.
 
-### nginx
+4. ### nginx
 Run `./run.sh nginx` to run the nginx docker container.  
 If the container is running successfully, navigating to http://host_url (change **host_url** to whatever value is defined in **config/common.env ALZKB_HOST**, see the **Configuration** section below for more details.) will show the **Website** (if it was deployed)  
 
