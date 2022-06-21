@@ -18,7 +18,7 @@ server {
     server_name $MYNGINX_NEO4J_BROWSER;
     location / {
         proxy_set_header Host $host;
-        proxy_pass http://$MYNGINX_NEO4J_BROWSER:7474;
+        proxy_pass http://$ALZKB_HOST:7474;
         proxy_redirect off;
     }
 }
