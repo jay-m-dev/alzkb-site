@@ -9,4 +9,5 @@ services:
     restart: always
     ports:
       - 80:80
-    command: /bin/bash -c "envsubst < alzkb.template > default.conf && nginx -g 'daemon off;'"
+    #replace ONLY env variables found in the template 
+    command: /bin/bash -c "envsubst \"$$(printf '$${%s} ' $$(env | cut -d'=' -f1))\" < alzkb.template > default.conf && nginx -g 'daemon off;'"
