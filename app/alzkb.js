@@ -27,4 +27,4 @@ app.get('/samples', (req, res) => {
   res.render('samples')
 })
 
-app.listen(process.env.PORT)
+app.listen(process.env.ALZKB_PORT)

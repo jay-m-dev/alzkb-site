@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:latest
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -15,5 +15,5 @@ RUN npm install pm2 --location=global
 # Bundle app source
 COPY . .
 
-EXPOSE 5000
+#EXPOSE 5000
 CMD ["pm2-runtime", "alzkb.js"]

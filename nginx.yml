@@ -5,6 +5,7 @@ services:
     build:
       context: ./nginx
     env_file:
+      - ./config/.env.common
       - ./config/.env.nginx
     restart: always
     ports:
