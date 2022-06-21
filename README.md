@@ -34,9 +34,9 @@ Nginx is used as a reverse proxy for the Website and the Neo4j Browser
 ## Building the Services
 `build.sh` is provided for your convenience to build the different services. The services can all be built independently of each other.
 
-1. ### Website (Optional)
-This step is optional, if you will not be deploying this website, this step can be skipped.  
-Run `./build.sh app` to build a nodejs container with the AlzKB Website.
+### 1. Website (Optional)
+  This step is optional, if you will not be deploying this website, this step can be skipped.  
+  Run `./build.sh app` to build a nodejs container with the AlzKB Website.
 
 2. ### neo4j-admin
 Run `./build.sh neo4j-admin` to build a neo4j/neo4j-admin docker image which will be used to load a neo4j dump file (see the **Running Services** section below).
