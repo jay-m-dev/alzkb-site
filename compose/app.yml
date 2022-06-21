@@ -5,7 +5,7 @@ services:
     build:
       context: ./app
     env_file:
-      - ./config/common.env
-      - ./config/node.env
+      - ../config/common.env
+      - ../config/node.env
     ports:
       - 5000:5000

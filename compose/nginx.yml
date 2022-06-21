@@ -5,8 +5,8 @@ services:
     build:
       context: ./nginx
     env_file:
-      - ./config/common.env
-      - ./config/nginx.env
+      - ../config/common.env
+      - ../config/nginx.env
     restart: always
     ports:
       - 80:80

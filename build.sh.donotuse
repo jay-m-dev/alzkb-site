@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SERVICE=$1
+
+echo $SERVICE
+
+docker compose --env-file ./config/common.env -f ./compose/$SERVICE.yml build

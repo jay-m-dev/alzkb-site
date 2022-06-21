@@ -2,4 +2,4 @@
 
 SERVICE=$1
 
-docker compose --env-file ./config/common.env -f $SERVICE.yml up -d
+docker compose --env-file ./config/common.env -f ./compose/$SERVICE.yml up -d --build

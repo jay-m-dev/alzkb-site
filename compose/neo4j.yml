@@ -4,7 +4,7 @@ services:
   neo4j:
     image: 'neo4j:latest'
     env_file:
-      - ./config/neo4j.env
+      - ../config/neo4j.env
     volumes:
       - '${ALZKB_DATA_ROOT}/neo4j/data:/var/lib/neo4j/data'
       - '${ALZKB_DATA_ROOT}/neo4j/logs:/var/lib/neo4j/logs'

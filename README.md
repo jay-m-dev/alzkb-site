@@ -28,33 +28,19 @@ This repository contains the following components:
 - **docker compose**
     - This can be installed by running `apt install docker-compose-plugin`
 
-## Building the Services
-`build.sh` is provided for your convenience to build the different services. The services can all be built independently of each other.
+## Quick Start
+All the necessary services can be started by following these steps:
+1. [Optional] Run `./run.sh app`
+2. Run `./run.sh neo4j-admin`
+3. Run `./run.sh neo4j`
+4. Run `./run.sh nginx`
 
-### 1. Website (Optional)
-Skip this step if you will not be deploying this website.    
-- **Run** `./build.sh app` to build a nodejs container with the AlzKB Website.
-  
-### 2. neo4j-admin
-- **Run** `./build.sh neo4j-admin` to build a neo4j/neo4j-admin docker image which will be used to load a neo4j dump file (see the **Running Services** section below).
+TODO: list steps to test that everything is running correctly.
 
-  - **NOTE:**
-    - **neo4j-admin.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed. These must be the same **volumes** as defined in **neo4j.yml**.
-  
-### 3. neo4j
-- **Run** `./build.sh neo4j` to build a neo4j docker image.
+For detailed steps and notes, see the section below.
 
-  - **NOTE:**
-    - **neo4j.yml** defines **volumes** which are used to write the data onto the host machine where this project is being deployed.
-  
-### 4. nginx
-- **Run** `./build.sh nginx` to build an nginx docker image that will be configured to act as a reverse proxy for both the **Website** and the **Neo4j Browser**.
-
-  - **NOTE:**
-    - If you are not deploying the **Website** for this project, **nginx** is not required to run the **Neo4j Browser**. The **Neo4j Browser** can still be accessed through the default port 7474. But using **nginx** will allow you to navigate to the browser without entering the port on the URL.
-  
-## Running the Services
-`run.sh` is provided for your convenience to run the different services after they have been built.
+## Detailed Steps for Building and Running the Services
+`run.sh` is provided for your convenience to run the different services.
 
 If you inspect **run.sh** you will notice that the services will be launched in **detached** mode (`-d` flag)
 
