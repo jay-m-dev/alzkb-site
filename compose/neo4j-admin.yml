@@ -4,8 +4,9 @@ services:
   neo4j-admin:
     image: 'neo4j/neo4j-admin'
     tty: true
-    command: /bin/bash -c 'neo4j-admin load --verbose --force --database=neo4j --from /var/lib/neo4j/import/alzkb.dump'
+    command: /bin/bash -c 'neo4j-admin load --verbose --force --database=neo4j --from /var/lib/neo4j/dump/alzkb.dump'
     volumes:
       - '${ALZKB_DATA_ROOT}/neo4j/data:/var/lib/neo4j/data'
-      - '${ALZKB_DATA_ROOT}/neo4j/import:/var/lib/neo4j/import'
+      #- '${ALZKB_DATA_ROOT}/neo4j/import:/var/lib/neo4j/import'
       - '${ALZKB_DATA_ROOT}/neo4j/logs:/var/lib/neo4j/logs'
+      - '../neo4j-admin/dump:/var/lib/neo4j/dump'

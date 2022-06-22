@@ -58,11 +58,12 @@ Skip this step if you did not build the container for the Website.
 ### 2. neo4j-admin
 This utility will load a dump file into the Neo4j database.  
 - Download the alzkb dump file [here](https://upenn.box.com/s/dalcofa8i7rkkc2h2n6bfg8nvmwi83pq)  
-- Place the dump file in the **neo4j/dump/** directory. The file must be named **alzkb.dump** (rename the file if necessary)
+- Place the dump file in the **ALZKB_DATA_ROOT/neo4j/import/** directory. The file must be named **alzkb.dump** (rename the file if necessary)
+  - Replace the value of ALZKB_DATA_ROOT for the value in config/common.env
 - Ensure that the **neo4j** container is ***not*** running! Otherwise the data will not be loaded.
   - run `docker ps` to list running containers
   - run `docker stop my_container` (replace **my_container** with the name of the neo4j container)
-- **Run** `./run.sh neo4j-admin` to load the **neo4j/dump/alzkb.dump** file
+- **Run** `./run.sh neo4j-admin` to load the **ALZKB_DATA_ROOT/neo4j/import/alzkb.dump** file
 
   - **NOTES:**
     - **neo4j-admin.yml** defines [named volumes]() to store the data on the host machine where this project is being deployed. These must be the same **volumes** defined in **neo4j.yml**.
