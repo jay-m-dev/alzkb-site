@@ -3,7 +3,7 @@ const config = {
     neo_browser: 'http://' + process.env.MYNGINX_NEO4J_BROWSER + ':7474/browser/',
   },
   prod: {
-    neo_browser: process.env.MYNGINX_NEO4J_BROWSER + '/browser/'
+    neo_browser: 'http://' + process.env.MYNGINX_NEO4J_BROWSER + '/browser/'
   }
 }
 //const configOld = {
