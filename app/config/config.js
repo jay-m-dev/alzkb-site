@@ -1,9 +1,9 @@
 const config = {
   dev: {
-    neo_browser: 'http://' + process.env.ALZKB_HOST + ':7474/browser/',
+    neo_browser: 'http://' + process.env.MYNGINX_NEO4J_BROWSER + ':7474/browser/',
   },
   prod: {
-    neo_browser: 'http://' + process.env.ALZKB_HOST + '/browser/'
+    neo_browser: process.env.MYNGINX_NEO4J_BROWSER + '/browser/'
   }
 }
 //const configOld = {
