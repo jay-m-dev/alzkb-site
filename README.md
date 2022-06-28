@@ -29,7 +29,7 @@ This repository is comprised of the following components:
 - Ensure that the variables set in **config/common.env** and **config/node.env** are correct based on where this project will be deployed.
 - Run `./run.sh app`
 ### **2.** Load the data (dump file)
-**Skip this step is the data has been previously loaded and there's no updates to the database.**
+**Skip this step if the data has been previously loaded and there's no updates to the database.**
 - Download the alzkb.dump file from [here](https://upennbox.com/s/dalcofa8i7rkkc2h2n6bfg8nvmwi83pq)   
   - Put this file in the **neo4j-admin/dump** directory and make sure it is called **alzkb.dump**
 - Ensure that the neo4j image is **not running.** If it is running, it must be stopped, otherwise the data will not be loaded.
@@ -45,10 +45,10 @@ This repository is comprised of the following components:
 ## Configuration files
 The **config/** directory contains the following files with environmental variables:
 ### common.env
-- `ALZKB_HOST` IP address of the host server where the **Website** is deployed.
-- `ALZKB_NEO4J_BROWSER` URL used for the Neo4J Browser, (different from `ALZKB_HOST`)
+- `ALZKB_HOST` IP address (or URL) of the host server where the **Website** will be deployed.
+- `ALZKB_NEO4J_BROWSER` URL used for the Neo4J Browser, (may be different from `ALZKB_HOST`)
 - `COMPOSE_PROJECT_NAME`, See the docker [documentation](https://docs.docker.com/compose/reference/envvars/).
-- `ALZKB_APP_SERVICE` Name of the docker service where the **Website** will run. This value is used by **nginx** to forward requests to this service.
+- `ALZKB_APP_SERVICE` Name of the docker service where the **Website** will run. This value is used by Nginx to forward requests to this service.
 - `ALZKB_PORT` Port used by ExpressJS to serve the **Website**, Nginx will forward requests to `ALZKB_HOST` to this port.
 - `ALZKB_DATA_ROOT` Directory where the data from **Neo4J** will be stored on the host machine (data, logs, etc.)
 
@@ -56,8 +56,8 @@ The **config/** directory contains the following files with environmental variab
 - Contains variables used by the Neo4j service.
   - For example, `NEO4J_dbms_security_auth__enabled=false` tells the server to allow connections without user credentials.  
 - For more information about these varibales, see the Neo4j [documenation](neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/).
-  - NOTE that these variables are prefixed with `NEO4J_` and use underscores **_** instead of peridods. **One** underscore **_** is used instead of periods, and **two** underscores **__** are used instead of underscores.
-    - Example, `NEO4J_dbms_security_auth__enabled`translates to `dbms.security.auth_enabled` in the Neo4j.conf file
+  - NOTE that these variables are prefixed with `NEO4J_` and use underscores **_** instead of the periods used by in the [neo4j.conf](https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/) file. **One** underscore **_** is used instead of periods, and **two** underscores **__** are used instead of underscores.
+    - For example, `NEO4J_dbms_security_auth__enabled` translates to `dbms.security.auth_enabled` in the [neo4j.conf](https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/) file.
 
 ### node.env
-- `NODE_ENV` If set to **production**, the `npm install` command installs dependencies without including any devDependancies as documented [here](l).
+- `NODE_ENV` If set to **production**, the `npm install` command installs dependencies without including any devDependancies as documented [here](https://docs.npmjs.com/cli/v8/commands/npm-install).
