@@ -1,7 +1,7 @@
 # Alzheimer's Knowledgebase (AlzKB) Site
-This repository contains the following components:
+This repository is comprised of the following components:
 
-- **Website**: site with some general information about this project. The source code for this website is found in the `app/` directory
+- **Website**: site with some general information about this project. The source code for this website is found in the `app` directory
 
 - **Neo4j**: used to store the graph database for this Knowledgebase.
 
@@ -9,85 +9,47 @@ This repository contains the following components:
 
 - **Configuration files**
   - Docker Compose Files
-    - The files in the `compose/` directory are `.yml` files which contain definitions for building a docker image.  
-    - To build and run these serives see the **Installation** section below.
+    - The files in the **compose** directory are `.yml` files which contain definitions for building a docker image.  
 
 - **Environmental Variables**
-  - The files in the `config/` directory contain environmental variables used by the different docker services. You will find the following files:
+  - The files in the **config** directory contain environmental variables used by the different docker services. You will find the following files:
     - **common.env**: contains variables which are shared among all services
     - **neo4j.env**: contains variables which are specific to the neo4j service
-    - **nginx.env**: contains variables which are specific to the nginx service
     - **node.env**: contains variables which are specific to the node service
 
 # Installation
 ## Install Docker
-**Docker** and **docker comopse** are required to build and run all services. You may choose to install them with the provided script `install-docker.sh` or by visiting the Docker website and following the steps manually:
-- **Docker**
-  - Most recent stable release
-    - [Official Docker Website Getting Started](https://docs.docker.com/engine/getstarted/step_one/)
-- **docker compose**
-    - This can be installed by running `apt install docker-compose-plugin`
+- Automated Installation
+  - Run `install-docker.sh` to install **Docker Engine**
+- Manual Installation
+  - Install either [**Docker Desktop**](https://www.docker.com/products/docker-desktop/) or [**Docker Engine**](https://docs.docker.com/engine/getstarted/step_one/) based on your needs.
+  - [**Docker Compose**](https://docs.docker.com/compose/install/)
+## Docker Images
+### **1.** Build and run the Website (NodeJS) **[Optional]**
+- Ensure that the variables set in **config/common.env** and **config/node.env** are correct based on where this project will be deployed.
+- Run `./run.sh app`
+### **2.** Load the data (dump file)
+**Skip this step is the data has been previously loaded and there's no updates to the database.**
+- Download the alzkb.dump file from [here](https://upennbox.com/s/dalcofa8i7rkkc2h2n6bfg8nvmwi83pq)   
+  - Put this file in the **neo4j-admin/dump** directory and make sure it is called **alzkb.dump**
+- Ensure that the neo4j image is **not running.** If it is running, it must be stopped, otherwise the data will not be loaded.
+- Ensure that the **ALZKB_DATA_ROOT** variable is set to the desired path where the database will be stored
+- Run `./run.sh neo4j-admin`
+### **3.** Build and run neo4j
+- Ensure that the **ALZKB_DATA_ROOT** variable is set to the desired path where the database will be stored. **This must be the same value that was used for neo4j-admin on the previous step.**
+- Run `./run.sh neo4j`
+### **4.** Build and run nginx
+- Ensure that the **ALZKB_HOST** and **ALZKB_NEO4J_BROWSER** variables are set to correctly in **config/common.env**
+- Run `./run.sh nginx`
 
-## Quick Start
-All the necessary services can be started by following these steps:
-1. [Optional] Run `./run.sh app`
-2. Run `./run.sh neo4j-admin`
-3. Run `./run.sh neo4j`
-4. Run `./run.sh nginx`
-
-TODO: list steps to test that everything is running correctly.
-
-For detailed steps and notes, see the section below.
-
-## Detailed Steps for Building and Running the Services
-`run.sh` is provided for your convenience to run the different services.
-
-If you inspect **run.sh** you will notice that the services will be launched in **detached** mode (`-d` flag)
-
-Once a service is up an running, you can see its status by running `docker ps`
-
-TODO: insert image here.
-
-To view any logs from the running container, you may run `docker logs container_name`
-
-### 1. Website (Optional)
-Skip this step if you did not build the container for the Website.  
-
-- **Run** `./run.sh app` to run the nodejs container with the AlzKB Website.
-
-### 2. neo4j-admin
-This utility will load a dump file into the Neo4j database.  
-- Download the alzkb dump file [here](https://upenn.box.com/s/dalcofa8i7rkkc2h2n6bfg8nvmwi83pq)  
-- Place the dump file in the **ALZKB_DATA_ROOT/neo4j/import/** directory. The file must be named **alzkb.dump** (rename the file if necessary)
-  - Replace the value of ALZKB_DATA_ROOT for the value in config/common.env
-- Ensure that the **neo4j** container is ***not*** running! Otherwise the data will not be loaded.
-  - run `docker ps` to list running containers
-  - run `docker stop my_container` (replace **my_container** with the name of the neo4j container)
-- **Run** `./run.sh neo4j-admin` to load the **ALZKB_DATA_ROOT/neo4j/import/alzkb.dump** file
-
-  - **NOTES:**
-    - **neo4j-admin.yml** defines [named volumes]() to store the data on the host machine where this project is being deployed. These must be the same **volumes** defined in **neo4j.yml**.
-    - Run this step whenever you need to load a new dump file. (Remember to rename the file to **alzkb.dump** if necessary)
-
-### 3. neo4j
-- ***Run*** `./run.sh neo4j` to run the neo4j docker container.  
-- Navigate to the Neo4j Browser at http://browser_url:7474 (replace **browser_url** with the value defined in **config/nginx.env MYNGINX_NEO4J_BROWSER**, see the **Configuration** section below for more details.)
-
-  - **NOTE:**
-    - **neo4j.yml** defines [named volumes](https://docs.docker.com/storage/volumes/) to store the data on the host machine where this project is being deployed.
-
-### 4. nginx
-- **Run** `./run.sh nginx` to run the nginx docker container.  
-- Navigate to http://host_url (replace **host_url** with one of the following values)
-  - If the **Website** was deployed, replace **host_url** with the value defined in **config/common.env ALZKB_HOST**, see the **Configuration** section below for more details.
-  - If the **Website** was not deployed, replace **host_url** with the value defined in **config/nginx.env MYNGINX_NEO4J_BROWSER**, see the **Configuration** section below for more details.
-
-## Configuration
+## Configuration files
 The **config/** directory contains the following files with environmental variables:
 ### common.env
-- `ALZKB_HOST` IP address of the host server where the **Website** is deployed  
-- `ALZKB_APP_SERVICE` Name of the docker service where the **Website** will run.  
-- ``ALZKB_PORT`` Port used by ExpressJS to serve the **Website**, Nginx will forward requests to `ALZKB_HOST` to this port.
+- `ALZKB_HOST` IP address of the host server where the **Website** is deployed.
+- `ALZKB_NEO4J_BROWSER` URL used for the Neo4J Browser, (different from `ALZKB_HOST`)
+- `COMPOSE_PROJECT_NAME`, See the docker [documentation](https://docs.docker.com/compose/reference/envvars/).
+- `ALZKB_APP_SERVICE` Name of the docker service where the **Website** will run. This value is used by **nginx** to forward requests to this service.
+- `ALZKB_PORT` Port used by ExpressJS to serve the **Website**, Nginx will forward requests to `ALZKB_HOST` to this port.
 - `ALZKB_DATA_ROOT` Directory where the data from **Neo4J** will be stored on the host machine (data, logs, etc.)
 
 ### neo4j.env
@@ -96,9 +58,6 @@ The **config/** directory contains the following files with environmental variab
 - For more information about these varibales, see the Neo4j [documenation](neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/).
   - NOTE that these variables are prefixed with `NEO4J_` and use underscores **_** instead of peridods. **One** underscore **_** is used instead of periods, and **two** underscores **__** are used instead of underscores.
     - Example, `NEO4J_dbms_security_auth__enabled`translates to `dbms.security.auth_enabled` in the Neo4j.conf file
-
-### nginx.env
-- `MYNGINX_NEO4J_BROWSER` URL used for the Neo4J Browser, which is different from from the URL for the **Website** (`ALZKB_HOST` in **config/common.env**.)
 
 ### node.env
 - `NODE_ENV` If set to **production**, the `npm install` command installs dependencies without including any devDependancies as documented [here](l).
