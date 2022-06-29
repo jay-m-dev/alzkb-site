@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: 'nginx:latest'
+    env_file: .env
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - './nginx:/etc/nginx/conf.d'
+      - '${ALZKB_DATA_ROOT}/nginx/logs:/var/log/nginx'
+    #replace ONLY env variables found in the template 
+    command: /bin/bash -c "envsubst \"$$(printf '$${%s} ' $$(env | cut -d'=' -f1))\" < /etc/nginx/conf.d/alzkb.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
