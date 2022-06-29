@@ -15,6 +15,7 @@ This repository is comprised of the following components:
 
 # Installation
 ## Prerequisites
+**Docker**
 - Automated Installation
   - Run `install-docker.sh` to install **Docker Engine**
 - Manual Installation
