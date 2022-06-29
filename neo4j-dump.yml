@@ -11,9 +11,3 @@ services:
       service: neo4j
     depends_on:
       - neo4j-admin
-  nginx:
-    extends:
-      file: nginx.yml
-      service: nginx
-    depends_on:
-      - neo4j

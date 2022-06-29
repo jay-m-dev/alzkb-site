@@ -7,57 +7,48 @@ This repository is comprised of the following components:
 
 - **Nginx**: used as a reverse proxy for the Website and the Neo4j Browser
 
-- **Configuration files**
-  - Docker Compose Files
-    - The files in the **compose** directory are `.yml` files which contain definitions for building a docker image.  
+- **Docker Compose files**
+  - The `.yml` files contain definitions for building a docker image.  
 
 - **Environmental Variables**
-  - The files in the **config** directory contain environmental variables used by the different docker services. You will find the following files:
-    - **common.env**: contains variables which are shared among all services
-    - **neo4j.env**: contains variables which are specific to the neo4j service
-    - **node.env**: contains variables which are specific to the node service
+  - The environmental variables in .env_sample are used by the different docker services.
 
 # Installation
-## Install Docker
+## Prerequisites
 - Automated Installation
   - Run `install-docker.sh` to install **Docker Engine**
 - Manual Installation
   - Install either [**Docker Desktop**](https://www.docker.com/products/docker-desktop/) or [**Docker Engine**](https://docs.docker.com/engine/getstarted/step_one/) based on your needs.
   - [**Docker Compose**](https://docs.docker.com/compose/install/)
-## Docker Images
-### **1.** Build and run the Website (NodeJS) **[Optional]**
-- Ensure that the variables set in **config/common.env** and **config/node.env** are correct based on where this project will be deployed.
-- Run `./run.sh app`
-### **2.** Load the data (dump file)
-**Skip this step if the data has been previously loaded and there's no updates to the database.**
-- Download the alzkb.dump file from [here](https://upennbox.com/s/dalcofa8i7rkkc2h2n6bfg8nvmwi83pq)   
-  - Put this file in the **neo4j-admin/dump** directory and make sure it is called **alzkb.dump**
-- Ensure that the neo4j image is **not running.** If it is running, it must be stopped, otherwise the data will not be loaded.
-- Ensure that the **ALZKB_DATA_ROOT** variable is set to the desired path where the database will be stored
-- Run `./run.sh neo4j-admin`
-### **3.** Build and run neo4j
-- Ensure that the **ALZKB_DATA_ROOT** variable is set to the desired path where the database will be stored. **This must be the same value that was used for neo4j-admin on the previous step.**
-- Run `./run.sh neo4j`
-### **4.** Build and run nginx
-- Ensure that the **ALZKB_HOST** and **ALZKB_NEO4J_BROWSER** variables are set to correctly in **config/common.env**
-- Run `./run.sh nginx`
-
-## Configuration files
-The **config/** directory contains the following files with environmental variables:
-### common.env
+## Building and Running
+### Building and deploying all services
+1. Get a dump file of the database [here](https://upennbox.com/s/dalcofa8i7rkkc2h2n6bfg8nvmwi83pq) and put this file in **neo4j/dump/**, make sure the filename is alzkb.dump (rename it if necessary)
+2. Copy the **.env_sample** as **.inv** and set the variable values as needed for your environment.
+2. To deploy the Website, Neo4j, Nginx and dump the database into neo4j run: `docker compose up -d --build`
+### Building and deploying the services independently
+The services can be built independently of each other as needed.  
+**First**, copy the **.env_sample** as **.inv** and update the variable values as needed for your environment.
+- Website
+  - Run `docker compose -f ./app.yml up -d --build`
+- Load the database dump
+  1. Ensure that the neo4j docker container is not running, it must be stopped if it is.
+  2. Get a dump file of the database [here](https://upennbox.com/s/dalcofa8i7rkkc2h2n6bfg8nvmwi83pq) and put this file in **neo4j/dump/**, make sure the filename is alzkb.dump (rename it if necessary)
+  3. Run `docker compose -f ./neo4j-admin.yml up -d --build`
+- Neo4j
+  - Run `docker compose -f ./neo4j.yml up -d --build`
+- Nginx
+  - Run `docker compose -f ./nginx.yml up -d --build`
+## Environmental Variables
+The **.env_sample** file contains the following environmental variables:
+- `COMPOSE_PROJECT_NAME` Base name of this project.
+  - See the docker [documentation](https://docs.docker.com/compose/reference/envvars/) for more details.
 - `ALZKB_HOST` IP address (or URL) of the host server where the **Website** will be deployed.
 - `ALZKB_NEO4J_BROWSER` URL used for the Neo4J Browser, (may be different from `ALZKB_HOST`)
-- `COMPOSE_PROJECT_NAME`, See the docker [documentation](https://docs.docker.com/compose/reference/envvars/).
 - `ALZKB_APP_SERVICE` Name of the docker service where the **Website** will run. This value is used by Nginx to forward requests to this service.
 - `ALZKB_PORT` Port used by ExpressJS to serve the **Website**, Nginx will forward requests to `ALZKB_HOST` to this port.
 - `ALZKB_DATA_ROOT` Directory where the data from **Neo4J** will be stored on the host machine (data, logs, etc.)
-
-### neo4j.env
-- Contains variables used by the Neo4j service.
-  - For example, `NEO4J_dbms_security_auth__enabled=false` tells the server to allow connections without user credentials.  
-- For more information about these varibales, see the Neo4j [documenation](neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/).
-  - NOTE that these variables are prefixed with `NEO4J_` and use underscores **_** instead of the periods used by in the [neo4j.conf](https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/) file. **One** underscore **_** is used instead of periods, and **two** underscores **__** are used instead of underscores.
-    - For example, `NEO4J_dbms_security_auth__enabled` translates to `dbms.security.auth_enabled` in the [neo4j.conf](https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/) file.
-
-### node.env
-- `NODE_ENV` If set to **production**, the `npm install` command installs dependencies without including any devDependancies as documented [here](https://docs.npmjs.com/cli/v8/commands/npm-install).
+- `NEO4J_*` variables to configure Neo4j
+  - For more information about these varibales, see the neo4j.conf [documenation](neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/).
+  - More details about how these variables map to the neo4j.conf file can be found [here](https://neo4j.com/docs/operations-manual/current/docker/configuration/)
+- `NODE_ENV` Set to either **production** or **development** 
+  - see [here](https://docs.npmjs.com/cli/v8/commands/npm-install) for more details.
